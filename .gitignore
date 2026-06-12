@@ -1,4 +1,5 @@
-.idea
+.idea/
 .venv
-tokens.tst
-__pycache__
+**/.DS_Store
+__pycache__/
+.env
