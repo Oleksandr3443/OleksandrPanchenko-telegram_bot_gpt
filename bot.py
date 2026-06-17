@@ -21,6 +21,10 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
         'quiz': 'Взяти участь у квізі ❓'
     })
 
+
+
+
+
 async def random(update: Update, context: ContextTypes.DEFAULT_TYPE):
     chat_modes[update.effective_user.id] = 'RANDOM'
     prompt = load_prompt('random')
