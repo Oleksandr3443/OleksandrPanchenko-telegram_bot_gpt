@@ -54,7 +54,9 @@ async def talk_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 
 async def talk_chat_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    mode = chat_modes.get(update.effective_user.id)
+    # mode = chat_modes.get(update.effective_user.id)
+    state = chat_modes.get(update.effective_user.id, {})
+    mode = state.get("mode")
     text =  update.message.text + 'Формулюй думки стисло, без зайвої води'
     response = await chat_gpt.send_question(load_prompt(mode), text)
     await send_text_buttons(
@@ -142,7 +144,7 @@ async def quiz_buttons_handler(update: Update, context):
             "mode": "QUIZ",
             "selected_topic": query}
         topic = chat_modes.get(user_id, {}).get("selected_topic")
-        first_question = await chat_gpt.send_question(load_prompt('quiz'), f"Питання за темою: {topic}")
+        first_question = await chat_gpt.send_question(load_prompt('quiz'), topic)
         await send_text_buttons(update, context, first_question, {
                     'quiz_finish': 'Повернутись в головне меню'
                 })
